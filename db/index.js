@@ -151,6 +151,7 @@ delete fields.tags;
 
 async function getAllPosts() {
   try {
+    console.log("starting the getAllPosts call")
     const { rows: postIds } = await client.query(`
       SELECT id
       FROM posts;
@@ -159,6 +160,20 @@ async function getAllPosts() {
       post => getPostById(post.id)
     ))
     return posts;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
+async function getAllTags() {
+  try {
+    console.log("starting the getAllTags call")
+    const {rows} = await client.query(`
+     SELECT * 
+     FROM tags;
+    `);
+    return rows;
   } catch (error) {
     throw error;
   }
@@ -308,5 +323,6 @@ module.exports = {
   createTags,
   addTagsToPost,
   getPostById,
-  getPostsByTagName
+  getPostsByTagName,
+  getAllTags
 }
