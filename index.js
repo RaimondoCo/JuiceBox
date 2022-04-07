@@ -19,7 +19,13 @@ server.listen(PORT, () => {
 const morgan = require('morgan');
 server.use(morgan('dev'));
 
-
+server.get('/background/:color', (req, res, next) => {
+    res.send(`
+      <body style="background: ${ req.params.color };">
+        <h1>Hello World</h1>
+      </body>
+    `);
+  });
 
 server.use((req, res, next) => {
     console.log("<____Body Logger START____>");

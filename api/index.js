@@ -21,6 +21,7 @@ apiRouter.use(async (req, res, next) => {
 
       if (id) {
         req.user = await getUserById(id);
+        console.log(req.user)
         next();
       }
     } catch ({ name, message }) {
